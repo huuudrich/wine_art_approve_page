@@ -17,10 +17,37 @@
         p {
             color: #333;
         }
+        .transaction-number {
+            font-size: 20px;
+            color: #007BFF;
+        }
     </style>
 </head>
 <body>
     <h1>Approve</h1>
     <p>This is my approve page hosted on GitHub Pages.</p>
+    <div class="transaction-number" id="transactionNumber">Loading transaction number...</div>
+
+    <script>
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.slice(1); // Убираем '?' из начала строки
+            const pairs = queryString.split('&'); // Разделяем параметры
+            pairs.forEach((pair) => {
+                const [key, value] = pair.split('=');
+                params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+            });
+            return params;
+        }
+
+        // Отображаем номер транзакции на странице
+        const params = getQueryParams();
+        const transactionNumberElement = document.getElementById('transactionNumber');
+        if (params.number) {
+            transactionNumberElement.textContent = "Transaction Number: " + params.number;
+        } else {
+            transactionNumberElement.textContent = "No transaction number provided.";
+        }
+    </script>
 </body>
 </html>
