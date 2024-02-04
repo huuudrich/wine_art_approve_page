@@ -21,12 +21,27 @@
             font-size: 20px;
             color: #007BFF;
         }
+        .copy-btn {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body>
     <h1>Approve</h1>
     <p>This is my approve page hosted on GitHub Pages.</p>
     <div class="transaction-number" id="transactionNumber">Loading transaction number...</div>
+    <!-- Кнопка для копирования номера транзакции -->
+    <button class="copy-btn" onclick="copyTransactionNumber()">Copy Number</button>
 
     <script>
         function getQueryParams() {
@@ -48,6 +63,17 @@
         } else {
             transactionNumberElement.textContent = "No transaction number provided.";
         }
+
+        // Функция для копирования номера транзакции
+        function copyTransactionNumber() {
+            const text = transactionNumberElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Transaction number copied to clipboard");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
     </script>
 </body>
 </html>
+
